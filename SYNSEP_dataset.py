@@ -28,4 +28,6 @@ for i in range(n):
     idx_turnon = np.random.permutation(range(120, 400))[:20]
     X[idx_turnoff, i] = np.zeros([5])
     X[idx_turnon, i] = np.ones([20])
-np.savetxt('SYNSEPdata.dat', X)
+np.savetxt('SYNSEPdataX.dat', X)
+np.savetxt('SYNSEPdataY.dat', y)
+
