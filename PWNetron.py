@@ -1,5 +1,5 @@
 import numpy as np
-
+import scipy.io as sio
 X = np.loadtxt('SYNSEPdataX.dat')
 Y = np.loadtxt('SYNSEPdataY.dat')
 def predict_label(W,x):
@@ -25,7 +25,7 @@ np.random.seed(0)
 A_accu = 1/D
 bt = 0
 counter = 0
-accu = []
+accu = np.zeros([X.shape[1],1])
 print_fre = 100
 
 for i in range(X.shape[1]):
@@ -58,6 +58,7 @@ for i in range(X.shape[1]):
     bt = bt + (1 - kt*betta*np.dot(delta.reshape(1,-1),W_Slack))*delta
     W_slid = -np.dot(np.diagflat(1/A_accu),bt)
     W_slid = W_slid.reshape([k,-1])
-    accu.append(correct*1.0/counter)
+    accu[i,0] = correct*1.0/counter
     if counter%print_fre ==1:
         print(correct*1.0/counter)
+sio.savemat('PWNeutron_accu_syssep.mat',{'accu':accu})
