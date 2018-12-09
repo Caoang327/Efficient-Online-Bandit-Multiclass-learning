@@ -61,4 +61,5 @@ for i in range(X.shape[1]):
     accu[i,0] = correct*1.0/counter
     if counter%print_fre ==1:
         print(correct*1.0/counter)
-sio.savemat('PWNeutron_accu_syssep.mat',{'accu':accu})
+file_name = 'PWNeutron_accu_syssep_g_'+str(gamma)+'.mat'
+sio.savemat(file_name,{'accu':accu})
