@@ -1,4 +1,5 @@
 import numpy as np
+import scipy.io as sio
 
 '''
 Second Order Banditron Algorithm
@@ -21,6 +22,7 @@ cumulative_margin = 0
 z = np.zeros([K*d])
 g = np.zeros([K*d])
 correct = 0
+accu = np.zeros([T])
 # SOBA algorithm
 for t in range(T):
     Wx = W.dot(X[:, t])
@@ -47,4 +49,7 @@ for t in range(T):
     A += nt*z*z
     theta -= nt*g
     W = (theta/A).reshape(K, d)
-print(correct/T)
+    accu[t] = correct / (t+1)
+print(accu)
+file_name = 'SOBA_accu_syssep_g_'+str(gamma)+'.mat'
+sio.savemat(file_name,{'accu':accu})
