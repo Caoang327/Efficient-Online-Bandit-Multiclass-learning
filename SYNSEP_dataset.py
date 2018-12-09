@@ -7,7 +7,7 @@ a 9-class, 400-dimensional synthetic data set of size 10^6
 np.random.seed(5)
 d = 400  # number of features
 K = 9  # number of classes
-n = 100  # number of data
+n = 10**6  # number of data
 # generate the fixed 9 bit-vectors
 V = np.zeros([d, K], int)
 idx_support = np.zeros([120, K], int)
