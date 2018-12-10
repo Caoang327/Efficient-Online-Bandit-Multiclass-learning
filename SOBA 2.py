@@ -22,6 +22,7 @@ cumulative_margin = 0
 z = np.zeros([K*d])
 g = np.zeros([K*d])
 correct = 0
+print_fre = 1000
 accu = np.zeros([T])
 # SOBA algorithm
 for t in range(T):
@@ -50,5 +51,8 @@ for t in range(T):
     theta -= nt*g
     W = (theta/A).reshape(K, d)
     accu[t] = correct / (t+1)
+    if t%print_fre == 0:
+        print(t)
+        print(correct/(t+1))
 file_name = 'SOBA_accu_syssep_g_'+str(gamma)+'.mat'
 sio.savemat(file_name,{'accu':accu})
