@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.io as sio
 X = np.loadtxt('SYNSEPdataX.dat')
-Y = np.loadtxt('SYNSEPdataY.dat')
+Y = np.loadtxt('SYNNONSEPdataYob.dat')
 def predict_label(W,x):
     out = np.dot(W,x)
     return np.argmax(out)+1
@@ -23,7 +23,7 @@ U = W
 np.random.seed(0)
 counter = 0
 accu = np.zeros([X.shape[1],1])
-print_fre = 100
+print_fre = 1000
 for i in range(X.shape[1]):
     counter = counter + 1
     x = X[:,i].reshape(-1,1)
@@ -46,6 +46,7 @@ for i in range(X.shape[1]):
     W = W + U
     accu[i,0] = correct*1.0/counter
     if counter%print_fre ==1:
+        print(counter)
         print(correct*1.0/counter)
-file_name = 'Banditron_accu_syssep_g_'+str(gamma)+'.mat'
+file_name = 'Banditron_accu_Nosyssep_g_'+str(gamma)+'.mat'
 sio.savemat(file_name,{'accu':accu})
