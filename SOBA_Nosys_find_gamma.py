@@ -8,7 +8,7 @@ Diagonal version
 ##X = np.loadtxt('SYNSEPdataX.dat')
 ##y = np.loadtxt('SYNSEPdataY.dat')
 X = np.loadtxt('TestX.dat')
-Y = np.loadtxt('TestY.dat')
+y = np.loadtxt('TestY.dat')
 d = 400  # number of features
 K = 9  # number of classes
 n = 200 # number of data
