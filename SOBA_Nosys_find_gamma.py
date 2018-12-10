@@ -5,14 +5,16 @@ import scipy.io as sio
 Second Order Banditron Algorithm
 Diagonal version
 '''
-X = np.loadtxt('SYNSEPdataX.dat')
-y = np.loadtxt('SYNSEPdataY.dat')
+##X = np.loadtxt('SYNSEPdataX.dat')
+##y = np.loadtxt('SYNSEPdataY.dat')
+X = np.loadtxt('TestX.dat')
+Y = np.loadtxt('TestY.dat')
 d = 400  # number of features
 K = 9  # number of classes
-n = 200000  # number of data
+n = 200 # number of data
 # initialization
 a = 1  # regularization parameter
-print_fre = 5000
+print_fre = 50
 gamma_list = [0, -0.5, -1, -1.5, -2, -2.5, -3, -3.5, -4]
 gamma_performance = np.zeros([len(gamma_list)])
 best_accuracy = 0
@@ -63,4 +65,5 @@ for gamma_index in range(len(gamma_list)):
     if correct/(t+1) >= best_accuracy:
         best_accuracy = correct/(t+1)
         best_gamma = gamma
+print('The best gamma is ')
 print(best_gamma)
