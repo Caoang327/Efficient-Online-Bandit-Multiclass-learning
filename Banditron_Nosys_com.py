@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.io as sio
 #X = np.loadtxt('SYNSEPdataX.dat')
-#Y = np.loadtxt('SYNSEPdataY.dat')
+#Y = np.loadtxt('SYNNONSEPdataYob.dat')
 X = np.loadtxt('TestX.dat')
 Y = np.loadtxt('TestY.dat')
 def predict_label(W,x):

@@ -1,9 +1,11 @@
+from scipy import sparse
 import numpy as np
 import scipy.io as sio
-#X = np.loadtxt('SYNSEPdataX.dat')
-#Y = np.loadtxt('SYNNONSEPdataYob.dat')
-X = np.loadtxt('TestX.dat')
-Y = np.loadtxt('TestY.dat')
+X = sparse.load_npz("Reuters4_datasetX.npz")
+Y = sparse.load_npz("Reuters4_datasetY.npz")
+Y = Y + np.zeros(Y.shape)
+Y = np.array(Y)
+Y = Y.flatten()
 def predict_label(W,x):
     out = np.dot(W,x)
     return np.argmax(out)+1
@@ -16,8 +18,8 @@ def compute_P(W,x):
 ##gamma = 0.01
 alpha = 10
 betta = 0.01
-k = 9
-d = 400
+k = 4
+d = X.shape[0]
 D = 1
 n = 500
 ##n = 200000
@@ -42,7 +44,9 @@ for gamma_index  in range(len(gamma_list)):
 
     for i in range(T):
         counter = counter + 1
-        x = X[:,i].reshape(-1,1)
+        x = X[:, i]
+        x = np.array(x + np.zeros(x.shape))
+        x = x.reshape(-1, 1)
         y = int(Y[i])
         pt = compute_P(W_slid,x)
         pt_silde = (1-gamma)*pt + gamma/k
@@ -68,7 +72,7 @@ for gamma_index  in range(len(gamma_list)):
         W_T = np.transpose(W)
         W_Slack = W_T.reshape(-1,1)
         bt = bt + (1 - kt*betta*np.dot(delta.reshape(1,-1),W_Slack))*delta
-        W_slid = -1/A_accu*bt
+        W_slid = (-1/A_accu)*bt
         W_slid = W_slid.reshape([k,-1])
         ##accu[i,0] = correct*1.0/counter
         if counter%print_fre ==1:
@@ -80,15 +84,15 @@ for gamma_index  in range(len(gamma_list)):
         best_accuracy = correct*1.0/counter
 print('The best gamma is ')
 print(best_gamma)
-file_name = 'PWNetron_Nonsys_find_gamma.mat'
+file_name = 'PWNetron_Rusters_find_gamma.mat'
 ##file_name = 'PWNetron_sys_find_gamma.mat'
 sio.savemat(file_name,{'performance':gamma_performance})
 
 gamma = best_gamma
 alpha = 10
 betta = 0.01
-k = 9
-d = 400
+k = 4
+d = X.shape[0]
 D = 1
 correct = 0
 t = 0
@@ -103,7 +107,9 @@ print_fre = 5000
 
 for i in range(X.shape[1]):
     counter = counter + 1
-    x = X[:,i].reshape(-1,1)
+    x = X[:, i]
+    x = np.array(x + np.zeros(x.shape))
+    x = x.reshape(-1, 1)
     y = int(Y[i])
     pt = compute_P(W_slid,x)
     pt_silde = (1-gamma)*pt + gamma/k
@@ -134,5 +140,5 @@ for i in range(X.shape[1]):
     accu[i,0] = correct*1.0/counter
     if counter%print_fre ==1:
         print(correct*1.0/counter)
-file_name = 'PWNetron_accu_Nosys_g_'+str(gamma)+'.mat'
+file_name = 'PWNeutron_accu_Rusters_g_'+str(gamma)+'.mat'
 sio.savemat(file_name,{'accu':accu})
