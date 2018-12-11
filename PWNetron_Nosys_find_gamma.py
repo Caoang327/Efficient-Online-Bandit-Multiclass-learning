@@ -80,6 +80,6 @@ for gamma_index  in range(len(gamma_list)):
         best_accuracy = correct*1.0/counter
 print('The best gamma is ')
 print(best_gamma)
-file_name = 'PWNetron_Nonsys_find_gamma.mat'
-##file_name = 'PWNetron_sys_find_gamma.mat'
+##file_name = 'PWNetron_Nonsys_find_gamma.mat'
+file_name = 'PWNetron_sys_find_gamma.mat'
 sio.savemat(file_name,{'performance':gamma_performance})
