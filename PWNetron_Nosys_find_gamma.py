@@ -75,7 +75,7 @@ for gamma_index  in range(len(gamma_list)):
             print(gamma)
             print(i)
     gamma_performance[gamma_index] = correct*1.0/counter
-    if (correct*1.0/counter) > best_gamma:
+    if (correct*1.0/counter) > best_accuracy:
         best_gamma = gamma
         best_accuracy = correct*1.0/counter
 print('The best gamma is ')
