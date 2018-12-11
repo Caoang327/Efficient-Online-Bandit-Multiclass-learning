@@ -6,7 +6,8 @@ Second Order Banditron Algorithm
 Diagonal version
 '''
 X = np.loadtxt('SYNSEPdataX.dat')
-y = np.loadtxt('SYNSEPdataY.dat')
+y_true = np.loadtxt('SYNSEPdataY.dat')
+y = np.loadtxt('SYNNONSEPdataYob.dat')
 d = 400  # number of features
 K = 9  # number of classes
 n = len(y)  # number of data
@@ -22,6 +23,7 @@ cumulative_margin = 0
 z = np.zeros([K*d])
 g = np.zeros([K*d])
 correct = 0
+print_fre = 1000
 accu = np.zeros([T])
 # SOBA algorithm
 for t in range(T):
@@ -33,9 +35,10 @@ for t in range(T):
         if sum(p[:i+1]) >= rand_num:
             ytilde = i+1
             break
+    if ytilde == y_true[t]:
+        correct += 1
     nt = 0
     if ytilde == y[t]:
-        correct += 1
         Wx_bar = np.zeros([K-1])
         Wx_bar[:ytilde-1] = Wx[:ytilde-1]
         Wx_bar[ytilde-1:] = Wx[ytilde:]
@@ -50,5 +53,8 @@ for t in range(T):
     theta -= nt*g
     W = (theta/A).reshape(K, d)
     accu[t] = correct / (t+1)
-file_name = 'SOBA_accu_syssep_g_'+str(gamma)+'.mat'
+    if t%print_fre == 0:
+        print(t)
+        print(correct/(t+1))
+file_name = 'SOBA1_accu_sysnonsep_g_'+str(gamma)+'.mat'
 sio.savemat(file_name,{'accu':accu})

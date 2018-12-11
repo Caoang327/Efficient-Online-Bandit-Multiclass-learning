@@ -6,7 +6,8 @@ Second Order Banditron Algorithm
 Diagonal version
 '''
 X = np.loadtxt('SYNSEPdataX.dat')
-y = np.loadtxt('SYNSEPdataY.dat')
+#y = np.loadtxt('SYNSEPdataY.dat')
+y = np.loadtxt('SYNNONSEPdataYob.dat')
 d = 400  # number of features
 K = 9  # number of classes
 n = len(y)  # number of data
@@ -54,5 +55,5 @@ for t in range(T):
     if t%print_fre == 0:
         print(t)
         print(correct/(t+1))
-file_name = 'SOBA_accu_syssep_g_'+str(gamma)+'.mat'
+file_name = 'SOBA2_accu_sysnonsep_g_'+str(gamma)+'.mat'
 sio.savemat(file_name,{'accu':accu})
