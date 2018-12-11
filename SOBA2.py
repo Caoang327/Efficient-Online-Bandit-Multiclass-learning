@@ -55,5 +55,5 @@ for t in range(T):
     if t%print_fre == 0:
         print(t)
         print(correct/(t+1))
-file_name = 'SOBA2_accu_sysnonsep_g_'+str(gamma)+'.mat'
+file_name = 'SOBA2_accu_Nosys_g_'+str(gamma)+'.mat'
 sio.savemat(file_name,{'accu':accu})
