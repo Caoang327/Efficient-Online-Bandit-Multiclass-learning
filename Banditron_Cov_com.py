@@ -19,8 +19,7 @@ def random_sample(P,p):
 n = X.shape[1] # number of data
 k = 7
 d = X.shape[0]
-
-print_fre = 5000
+print_fre = 2000
 gamma_list = [1,0.5, 0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001]
 gamma_performance = np.zeros([len(gamma_list)])
 best_accuracy = 0
@@ -53,7 +52,8 @@ for gamma_index in range(len(gamma_list)):
             U[j,:] = coe*x.flatten()
         W = W + U
         if counter%print_fre ==1:
-            print(correct*1.0/counter)
+            print(counter)
+            print(gamma)
     gamma_performance[gamma_index] = correct/(i+1)
     if correct/(i+1) >= best_accuracy:
         best_accuracy = correct/(i+1)
@@ -71,7 +71,7 @@ U = W
 np.random.seed(0)
 counter = 0
 accu = np.zeros([X.shape[1],1])
-print_fre = 100
+print_fre = 2000
 for i in range(X.shape[1]):
     counter = counter + 1
     x = X[:,i].reshape(-1,1)
@@ -94,6 +94,7 @@ for i in range(X.shape[1]):
     W = W + U
     accu[i,0] = correct*1.0/counter
     if counter%print_fre ==1:
+        print(counter)
         print(correct*1.0/counter)
 file_name = 'Banditron_accu_Cov_g_'+str(gamma)+'.mat'
 sio.savemat(file_name,{'accu':accu})

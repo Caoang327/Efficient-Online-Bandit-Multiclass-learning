@@ -13,7 +13,7 @@ K = 9  # number of classes
 n = len(y)  # number of data
 # initialization
 a = 1  # regularization parameter
-gamma = 0.01  # exploration parameter
+gamma = 2**(-7) # exploration parameter
 T = n  # number of rounds
 W = np.zeros([K, d])
 A = a * np.ones([K*d])
@@ -27,7 +27,7 @@ print_fre = 1000
 accu = np.zeros([T])
 # SOBA algorithm
 for t in range(T):
-    x = X[:,t].reshape(-1,1)
+    x = X[:,t]
     Wx = W.dot(x)
     yhat = np.argmax(Wx) + 1
     p = (1-gamma) * E[:, yhat-1] + gamma / K * np.ones([K])

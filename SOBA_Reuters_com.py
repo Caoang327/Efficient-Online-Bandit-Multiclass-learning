@@ -21,7 +21,6 @@ gamma = 0.01  # exploration parameter
 ##n = len(y)  # number of data
 n = 200000
 T = n  # number of rounds
-
 # SOBA algorithm
 gamma_list = [1,0.5, 0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001]
 gamma_performance = np.zeros([len(gamma_list)])

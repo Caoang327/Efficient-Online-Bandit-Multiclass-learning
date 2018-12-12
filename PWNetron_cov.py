@@ -4,7 +4,7 @@ X = np.loadtxt('CovtypedataX.dat')
 Y = np.loadtxt('CovtypedataY.dat')
 def predict_label(W,x):
     out = np.dot(W,x)
-    return np.argmax(out)+1
+    return np.argmax(out)[0]+1
 def compute_P(W,x):
     p = np.dot(W,x)
     e_p = np.exp(p - np.max(p))
