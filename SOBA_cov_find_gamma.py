@@ -14,7 +14,7 @@ K = 7  # number of classes
 n = 200000 # number of data
 # initialization
 a = 1  # regularization parameter
-print_fre = 50
+print_fre = 2000
 gamma_list = [1,0.5, 0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001]
 gamma_performance = np.zeros([len(gamma_list)])
 best_accuracy = 0
