@@ -41,7 +41,7 @@ for t in range(T):
         Wx_bar = np.zeros([K-1])
         Wx_bar[:ytilde-1] = Wx[:ytilde-1]
         Wx_bar[ytilde-1:] = Wx[ytilde:]
-        idx = np.argmax(Wx)
+        idx = np.argmax(Wx_bar)
         if idx <= ytilde-2:
             ybar = idx + 1
         else:
