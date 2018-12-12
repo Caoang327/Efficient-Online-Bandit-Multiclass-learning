@@ -4,8 +4,6 @@ from scipy import sparse
 def predict_label(W,x):
     out = np.dot(W,x)
     return np.argmax(out)+1
-
-
 X = sparse.load_npz("Reuters4_datasetX.npz")
 Y = sparse.load_npz("Reuters4_datasetY.npz")
 Y = Y + np.zeros(Y.shape)

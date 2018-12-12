@@ -28,5 +28,5 @@ for t in range(T):
     elif y_hat == y:
         correct = correct + 1
     accu[t] = correct/(t+1)
-file_name = 'Perceptron_sys_accu.mat'
+file_name = 'Perceptron_Cov_accu.mat'
 sio.savemat(file_name,{'accu':accu})
