@@ -41,7 +41,11 @@ for t in range(T):
         Wx_bar = np.zeros([K-1])
         Wx_bar[:ytilde-1] = Wx[:ytilde-1]
         Wx_bar[ytilde-1:] = Wx[ytilde:]
-        ybar = np.argmax(Wx)+1
+        idx = np.argmax(Wx)
+        if idx <= ytilde-2:
+            ybar = idx + 1
+        else:
+            ybar = idx + 2
         g = 1 / p[ytilde-1] * np.kron(E[:, ybar-1]-E[:, ytilde-1], X[:, t])
         z = np.sqrt(p[ytilde-1]) * g
         m = (sum(W.reshape(-1, 1)*z.reshape(-1, 1))**2 + 2*sum(W.reshape(-1, 1)*g.reshape(-1, 1))) / (1 + sum(z*z/A))
