@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.io as sio
-X = np.loadtxt('SYNSEPdataX.dat')
-Y = np.loadtxt('SYNSEPdataY.dat')
+X = np.loadtxt('CovtypedataX.dat')
+Y = np.loadtxt('CovtypedataY.dat')
 def predict_label(W,x):
     out = np.dot(W,x)
     return np.argmax(out)+1
@@ -14,16 +14,16 @@ def random_sample(P,p):
             index = i+1
             break
     return index
-gamma = 0.0001
-k = 9
-d = 400
+gamma = 0.001
+k = 7
+d = X.shape[0]
 correct = 0
 W = np.zeros([k,d])
 U = W
 np.random.seed(0)
 counter = 0
 accu = np.zeros([X.shape[1],1])
-print_fre = 100
+print_fre = 2000
 for i in range(X.shape[1]):
     counter = counter + 1
     x = X[:,i].reshape(-1,1)
@@ -47,5 +47,5 @@ for i in range(X.shape[1]):
     accu[i,0] = correct*1.0/counter
     if counter%print_fre ==1:
         print(correct*1.0/counter)
-file_name = 'Banditron_accu_sys_g_'+str(gamma)+'.mat'
+file_name = 'Banditron_accu_cov_g_'+str(gamma)+'.mat'
 sio.savemat(file_name,{'accu':accu})

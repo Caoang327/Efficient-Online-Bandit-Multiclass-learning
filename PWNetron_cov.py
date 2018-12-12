@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.io as sio
-X = np.loadtxt('SYNSEPdataX.dat')
-Y = np.loadtxt('SYNSEPdataY.dat')
+X = np.loadtxt('CovtypedataX.dat')
+Y = np.loadtxt('CovtypedataY.dat')
 def predict_label(W,x):
     out = np.dot(W,x)
     return np.argmax(out)+1
@@ -11,11 +11,11 @@ def compute_P(W,x):
     soft_max = e_p / e_p.sum()
     return soft_max
 
-gamma = 0.0001
+gamma = 2**(-9)
 alpha = 10
 betta = 0.01
-k = 9
-d = 400
+k = 7
+d = X.shape[0]
 D = 1
 correct = 0
 t = 0
@@ -61,5 +61,5 @@ for i in range(X.shape[1]):
     accu[i,0] = correct*1.0/counter
     if counter%print_fre ==1:
         print(correct*1.0/counter)
-file_name = 'PWNeutron_accu_syssep_g_'+str(gamma)+'.mat'
+file_name = 'PWNeutron_accu_cov_g_'+str(gamma)+'.mat'
 sio.savemat(file_name,{'accu':accu})
