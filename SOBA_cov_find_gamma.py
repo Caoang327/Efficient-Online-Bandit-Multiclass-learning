@@ -5,13 +5,12 @@ import scipy.io as sio
 Second Order Banditron Algorithm
 Diagonal version
 '''
-X = np.loadtxt('SYNSEPdataX.dat')
-y = np.loadtxt('SYNSEPdataY.dat')
+X = np.loadtxt('CovtypedataX.dat')
+y = np.loadtxt('CovtypedataY.dat')
 #X = np.loadtxt('TestX.dat')
 #y = np.loadtxt('TestY.dat')
-d = 400  # number of features
-K = 9  # number of classes
-#n = 2000
+d = X.shape[0]  # number of features
+K = 7  # number of classes
 n = 200000 # number of data
 # initialization
 a = 1  # regularization parameter
@@ -72,5 +71,5 @@ for gamma_index in range(len(gamma_list)):
         best_gamma = gamma
 print('The best gamma is ')
 print(best_gamma)
-file_name = 'SOBA_Nonsys_find_gamma.mat'
+file_name = 'SOBA_cov_find_gamma.mat'
 sio.savemat(file_name,{'performance':gamma_performance})
