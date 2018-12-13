@@ -14,7 +14,6 @@ def compute_P(W,x):
     e_p = np.exp(p - np.max(p))
     soft_max = e_p / e_p.sum()
     return soft_max
-
 ##gamma = 0.01
 alpha = 10
 betta = 0.01

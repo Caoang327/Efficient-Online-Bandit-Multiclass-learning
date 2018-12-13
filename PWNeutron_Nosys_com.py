@@ -109,13 +109,14 @@ for i in range(X.shape[1]):
     y = int(Y[i])
     pt = compute_P(W_slid,x)
     pt_silde = (1-gamma)*pt + gamma/k
-    if np.random.random() >= gamma:
-        W = W_slid
-        y_hat = predict_label(W,x)
-    else:
-        W = np.zeros([k,d])
-        roll = np.random.randint(1,k+1)
-        y_hat = roll
+    # if np.random.random() >= gamma:
+    #     W = W_slid
+    #     y_hat = predict_label(W,x)
+    # else:
+    #     W = np.zeros([k,d])
+    #     roll = np.random.randint(1,k+1)
+    #     y_hat = roll
+
     if y_hat == y:
         eyt = np.zeros([k,1])
         eyt[y-1][0] = 1
