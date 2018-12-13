@@ -53,7 +53,8 @@ for t in range(T):
             ybar = idx + 2
         g = 1 / p[ytilde-1] * np.kron(E[:, ybar-1]-E[:, ytilde-1], x)
         z = np.sqrt(p[ytilde-1]) * g
-        m = (sum(W.reshape(-1, 1)*z.reshape(-1, 1))**2 + 2*sum(W.reshape(-1, 1)*g.reshape(-1, 1))) / (1 + sum(z*z/A))
+        #m = (sum(W.reshape(-1, 1)*z.reshape(-1, 1))**2 + 2*sum(W.reshape(-1, 1)*g.reshape(-1, 1))) / (1 + sum(z*z/A))
+        m = ((W.reshape(1, -1).dot(z.reshape(-1, 1)))**2 + 2*W.reshape(1, -1).dot(g.reshape(-1, 1))) / (1 + z.reshape(1, -1).dot((z/A).reshape(-1, 1)))
         if cumulative_margin+m >= 0:
             nt = 1
         cumulative_margin += nt*m
