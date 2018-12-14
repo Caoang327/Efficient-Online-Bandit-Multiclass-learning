@@ -1,3 +1,4 @@
+## Author Ang Cao
 from sklearn.datasets import fetch_covtype
 import numpy as np
 covtype = fetch_covtype()

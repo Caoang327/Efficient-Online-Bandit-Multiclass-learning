@@ -1,3 +1,4 @@
+## Author Ang Cao
 import numpy as np
 import scipy.io as sio
 X = np.loadtxt('SYNSEPdataX.dat')
