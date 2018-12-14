@@ -6,8 +6,8 @@ Y = np.loadtxt('SYNSEPdataY.dat')
 def predict_label(W,x):
     out = np.dot(W,x)
     return np.argmax(out)+1
-def compute_P(W,x):
-    p = np.dot(W,x)
+def compute_P(W,x,alpha=10):
+    p = alpha*np.dot(W,x)
     e_p = np.exp(p - np.max(p))
     soft_max = e_p / e_p.sum()
     return soft_max
@@ -33,7 +33,7 @@ for i in range(X.shape[1]):
     counter = counter + 1
     x = X[:,i].reshape(-1,1)
     y = int(Y[i])
-    pt = compute_P(W_slid,x)
+    pt = compute_P(W_slid,x,alpha)
     pt_silde = (1-gamma)*pt + gamma/k
     if np.random.random() >= gamma:
         W = W_slid
@@ -54,7 +54,7 @@ for i in range(X.shape[1]):
         delta = (pt[y_hat-1,0]/pt_silde[y_hat-1,0])*np.kron(eyt - 1/k,x)
         kt = 1
     A_accu = A_accu + kt*betta*(delta**2)
-    W_T = np.transpose(W)
+    W_T = W
     W_Slack = W_T.reshape(-1,1)
     bt = bt + (1 - kt*betta*np.dot(delta.reshape(1,-1),W_Slack))*delta
     W_slid = -np.dot(np.diagflat(1/A_accu),bt)
